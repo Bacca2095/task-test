@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx run-many --target=serve --parallel"
+    "start": "nx serve",
+    "start:all": "nx run-many --target=serve --parallel",
+    "test:all": "nx run-many --target=test --parallel",
+    "build:all": "nx run-many --target=build --parallel"
   },
   "private": true,
   "dependencies": {
@@ -11,11 +14,14 @@
     "@nestjs/core": "^10.0.2",
     "@nestjs/platform-express": "^10.0.2",
     "axios": "^1.6.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-router-dom": "6.11.2",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.8.0"
+    "rxjs": "^7.8.0",
+    "supertest": "^7.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.8.0",
@@ -44,6 +50,7 @@
     "@types/node": "~18.16.9",
     "@types/react": "18.3.1",
     "@types/react-dom": "18.3.0",
+    "@types/supertest": "^6.0.2",
     "@vitejs/plugin-react": "^4.2.0",
     "@vitest/coverage-v8": "^1.0.4",
     "@vitest/ui": "^1.3.1",

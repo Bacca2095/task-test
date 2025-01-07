@@ -12,9 +12,13 @@
     "module": "esnext",
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
+    "strict": true,
     "skipDefaultLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@backend/*": ["apps/backend/src/*"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
