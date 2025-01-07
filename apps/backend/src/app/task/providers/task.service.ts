@@ -16,15 +16,15 @@ export class TaskService {
     return this.taskInMemory.findAll();
   }
 
-  findOne(id: number): TaskDto {
+  findOne(id: string): TaskDto {
     return this.taskInMemory.findOne(id);
   }
 
-  update(id: number, task: UpdateTaskDto): TaskDto {
+  update(id: string, task: UpdateTaskDto): TaskDto {
     return this.taskInMemory.update(id, task);
   }
 
-  remove(id: number): TaskDto {
+  remove(id: string): TaskDto {
     return this.taskInMemory.remove(id);
   }
 }

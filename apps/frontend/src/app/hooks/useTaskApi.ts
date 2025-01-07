@@ -26,7 +26,7 @@ const useTaskApi = () => {
     }
   };
 
-  const updateTask = async (id: number, updatedFields: Partial<Task>) => {
+  const updateTask = async (id: string, updatedFields: Partial<Task>) => {
     const response = await fetch(`${baseUrl}/${id}`, {
       method: 'PUT',
       headers: {
@@ -45,19 +45,23 @@ const useTaskApi = () => {
     }
   };
 
-  const deleteTask = async (id: number) => {
+  const deleteTask = async (id: string) => {
     const response = await fetch(`${baseUrl}/${id}`, {
       method: 'DELETE',
     });
 
     if (response.ok) {
-      setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+      const taskDeleted = await response.json();
+      setTasks((prevTasks) =>
+        prevTasks.filter((task) => task.id !== taskDeleted.id)
+      );
+      window.location.reload();
     }
   };
 
   useEffect(() => {
     getTasks();
-  }, [getTasks]);
+  }, []);
 
   return { tasks, getTasks, createTask, updateTask, deleteTask };
 };

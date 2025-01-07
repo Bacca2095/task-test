@@ -4,8 +4,8 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
-  Put,
 } from '@nestjs/common';
 import { TaskService } from '../providers/task.service';
 import { CreateTaskDto } from '../dto/create-task.dto';
@@ -38,24 +38,24 @@ export class TaskController {
   @Get(':id')
   @ApiOkResponse({ type: TaskDto })
   @ApiNotFoundResponse({ description: 'Task not found' })
-  findOne(@Param('id') id: number): TaskDto {
+  findOne(@Param('id') id: string): TaskDto {
     return this.taskService.findOne(id);
   }
 
-  @Put(':id')
+  @Patch(':id')
   @ApiOkResponse({ type: TaskDto })
   @ApiNotFoundResponse({ description: 'Task not found' })
   update(
-    @Param('id') id: number,
+    @Param('id') id: string,
     @Body() updateTaskDto: UpdateTaskDto
   ): TaskDto {
-    return this.taskService.update(+id, updateTaskDto);
+    return this.taskService.update(id, updateTaskDto);
   }
 
   @Delete(':id')
   @ApiOkResponse({ type: TaskDto })
   @ApiNotFoundResponse({ description: 'Task not found' })
-  remove(@Param('id') id: number): TaskDto {
+  remove(@Param('id') id: string): TaskDto {
     return this.taskService.remove(id);
   }
 }

@@ -10,7 +10,7 @@ export class TaskInMemoryService {
   create(task: CreateTaskDto): TaskDto {
     const newTask: TaskDto = {
       ...task,
-      id: this.tasks.length + 1,
+      id: this.generateRandomId(),
     };
     this.tasks.push(newTask);
     return newTask;
@@ -20,7 +20,7 @@ export class TaskInMemoryService {
     return this.tasks;
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     const task = this.tasks.find((task) => task.id === id);
     if (!task) {
       throw new NotFoundException(`Task with id ${id} not found`);
@@ -28,7 +28,7 @@ export class TaskInMemoryService {
     return task;
   }
 
-  update(id: number, task: UpdateTaskDto) {
+  update(id: string, task: UpdateTaskDto) {
     const taskIndex = this.validateIfTaskExists(id);
 
     this.tasks[taskIndex] = {
@@ -40,13 +40,13 @@ export class TaskInMemoryService {
     return this.tasks[taskIndex];
   }
 
-  remove(id: number) {
+  remove(id: string) {
     const taskIndex = this.validateIfTaskExists(id);
     const [removedTask] = this.tasks.splice(taskIndex, 1);
     return removedTask;
   }
 
-  private validateIfTaskExists(id: number): number {
+  private validateIfTaskExists(id: string): number {
     const taskIndex = this.tasks.findIndex(
       (existingTask) => existingTask.id === id
     );
@@ -55,5 +55,9 @@ export class TaskInMemoryService {
     }
 
     return taskIndex;
+  }
+
+  private generateRandomId(): string {
+    return Math.random().toString(36).substring(7);
   }
 }
